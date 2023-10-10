@@ -11,8 +11,9 @@ import javax.swing.JFrame;
 public class Game extends Canvas implements Runnable, KeyListener{
 	// O KeyListener permite a chamada dos inputs
 	
-	public static int WIDTH = 1080, HEIGHT = 720; // Que nem no XNA, define o tamanho da janela
+	public static int WIDTH = 900, HEIGHT = 900; // Que nem no XNA, define o tamanho da janela
 	public Player player;
+	public World world;
 	
 	public Game() {
 		this.addKeyListener(this);
@@ -21,7 +22,8 @@ public class Game extends Canvas implements Runnable, KeyListener{
 		this.setPreferredSize(new Dimension(WIDTH,HEIGHT)); 
 		// Define quais parâmetros vão ser usados para a criação da janela
 		
-		player = new Player(0,0);
+		player = new Player(450,450);
+		world = new World();
 	}
 
 	public void tick() // Responsável pela lógica (movimentação, colisões, etc)
@@ -47,6 +49,7 @@ public class Game extends Canvas implements Runnable, KeyListener{
 		g.fillRect(0, 0, WIDTH, HEIGHT);
 		
 		player.render(g);
+		//world.render(g);
 		
 		bs.show();
 	}
@@ -157,6 +160,9 @@ public class Game extends Canvas implements Runnable, KeyListener{
 			player.down = true;
 		}
 		
+		if(e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+			System.exit(0);
+		}
 	}
 
 	@Override

@@ -9,7 +9,7 @@ public class Player extends Rectangle {
 	public boolean right, up, down, left; //variáveis de controle do player
 	
 	public Player(int x, int y) {
-		super(x,y,100,100);
+		super(x,y,30,30);
 	}
 
 	
@@ -17,16 +17,16 @@ public class Player extends Rectangle {
 	
 	public void tick() { //Seria a mesma coisa que o Update() do C# ?
 		
-		if(right) {
+		if(right && World.isFree(x+spd, y) ) {
 			x+=spd;
-		}else if(left) {
+		}else if(left && World.isFree(x-spd, y)) {
 			x-=spd;
 		}
 		
 		// Perguntar para o Zé o pq do valor positivo ta fazendo o Player descer e o negativo, subir
-		if(up) {
+		if(up && World.isFree(x, y - spd)) {
 			y-=spd;
-		}else if(down) {
+		}else if(down && World.isFree(x, y + spd)) {
 			y+=spd;
 		}
 	}
